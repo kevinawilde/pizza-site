@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		@keyframes run {
+			from {
+				top: 10px;
+				left: 10px;
+			}
+
+			to {
+				top: 10px;
+				left: 800px;
+			}
+		}
+
+		@keyframes run2 {
+			from {
+				top: 10px;
+				left: -400px;
+			}
+
+			to {
+				top: 10px;
+				left: 100px;
+			}
+		}
+
+		.running {
+			top:10px;
+			left:10px;
+			position: absolute;
+			animation-name: run;
+			animation-duration:3s;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+			animation-timing-function: ease-in-out;
+		}
+
+		#pizza-man2 {
+			position:absolute;
+			left:-400px;
+			top:10px;
+			position: absolute;
+			animation-name: run2;
+			animation-duration:3s;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+			animation-timing-function: ease-in-out;
+		}
+
+		.paused{
+		    -webkit-animation-play-state:paused;
+		    -moz-animation-play-state:paused;
+		    -o-animation-play-state:paused; 
+		    animation-play-state:paused;
+		}
+	</style>
+</head>
+<body>
+	<div style="height:230px;">
+		<img id="pizza-man" class="running" src="pizza-man-right.gif" />
+		<img id="pizza-man2" src="pizza-man-right.gif" />
+	</div>
+
+	<input type="button" id="pause" value="Pause Chef" />
+	<audio src="pizza-kitchen-finish/static/sounds/sound-computer-keyboard.wav" id="keyboardAudio"></audio>
+	<audio src="pizza-kitchen-finish/static/sounds/sound-order-up.wav" id="orderUpAudio"></audio>
+
+<script type="text/javascript">
+let p = document.getElementById("pizza-man");
+let b = document.getElementById("pause");
+let keyboardAudio = document.getElementById("keyboardAudio");
+let orderUpAudio = document.getElementById('orderUpAudio');
+
+let orders = [1, 2];
+
+function toggleChef(e) {
+	p.classList.toggle('paused');
+}
+
+function customerPlacedOrder() {
+		placeOrder();
+		p.attributes.src.nodeValue = "pizza-man-right.gif";
+		toggleChef();	
+}
+function listener(e) {
+	console.dir(e);
+	switch(e.type) {
+		case "animationstart":
+		console.log('start');
+		  break;
+
+		case "animationend":
+		  console.log('end');
+		  break;
+
+		case "animationiteration":
+			console.dir(p);
+			if(p.attributes.src.nodeValue.indexOf('right') > 0) {
+				toggleChef();
+				keyboardAudio.play();
+
+				setTimeout(function() { 
+					toggleChef();
+					p.attributes.src.nodeValue = "pizza-man-left.gif";
+					keyboardAudio.pause();
+				}, 2000);
+			}
+			else if(p.attributes.src.nodeValue.indexOf('left') > 0) {
+				toggleChef();
+
+				if(orders.length > 0) {
+					orders.pop();
+					orderUpAudio.play();
+
+					setTimeout(function() {
+						p.attributes.src.nodeValue = "pizza-man-right.gif";
+						toggleChef();
+					}, 1000);
+				}
+
+			}
+		  console.log(`new loop started after ${e.elapsedTime} seconds`);
+		  break;
+	}
+}
+p.addEventListener("animationstart",listener, false);
+p.addEventListener("animationend",listener, false);
+p.addEventListener("animationiteration",listener, false);
+b.addEventListener("click", toggleChef, false);
+
+</script>
+</body>
+</html>

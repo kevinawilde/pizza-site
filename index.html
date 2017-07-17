@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div class='pizzaShop'>
+        <img id='cashRegister' src="register.png">
+        <img id='closedFridge' src="freezer-closed.png">
+        <img id='pickupCounter' src="table.png">
+        <img id='oven' src="oven-open.png">
+        <img id='chef' src="pizza-man-left.png">
+        <img id='customer' src="person-student.png">
+        <audio src="sound-computer-keyboard.wav" id="keyboardAudio"></audio>
+        <audio src="sound-order-up.wav" id="orderUpAudio"></audio>
+        <audio src="shop-door.mp3" id="door"></audio>
+        <audio src="sound-footsteps-2.wav" id="steps"></audio>
+    </div>
+    <script type="text/javascript">
+    let p = document.getElementById("chef");
+    let chef2 = document.getElementById("chef2");
+    let b = document.getElementById("pause");
+    let keyboardAudio = document.getElementById("keyboardAudio");
+    let orderUpAudio = new Audio('sound-order-up.wav')
+    let fridge = document.getElementById('closedFridge')
+    let c = document.getElementById('customer');
+    let door = document.getElementById('door')
+    let steps = document.getElementById('steps')
+    let oven = document.getElementById('oven');
+
+    p.addEventListener("animationstart", listener, false);
+    p.addEventListener("animationend", listener, false);
+    p.addEventListener("animationiteration", listener, false);
+    c.addEventListener("animationstart", customer, false);
+    c.addEventListener("animationend", customer, false);
+
+    function toggleChef(e) {
+        p.classList.toggle('paused');
+    }
+
+    function customer(e) {
+        switch (e.type) {
+            case "animationstart":
+                p.attributes.src.nodeValue = "pizza-man-left.gif";
+                door.play();
+                steps.play();
+
+            case "animationend":
+                setTimeout(function() {
+                    p.attributes.src.nodeValue = "pizza-man-typing-left.png";
+                    keyboardAudio.play();
+                    steps.pause();
+                    door.pause();
+                }, 3000);
+                setTimeout(function() {
+                    p.attributes.src.nodeValue = "pizza-man-right.png";
+                }, 7000);
+                setTimeout(function() {
+                    steps.play();
+                }, 7000);
+                
+                setTimeout(function() {
+                    fridge.attributes.src.nodeValue = "freezer-open.png";
+
+                }, 11000);
+                setTimeout(function() {
+                    p.attributes.src.nodeValue = "pizza-man-frozen-right.png";
+                }, 11500);
+                setTimeout(function() {
+                    fridge.attributes.src.nodeValue = "freezer-closed.png";
+                }, 12700);
+                setTimeout(function() {
+                    p.attributes.src.nodeValue = "pizza-man-right.png";
+                    oven.attributes.src.nodeValue = "oven-closed.png";
+                    toggleChef();
+                }, 14000);
+                
+
+
+                
+
+
+        }
+    }
+
+
+    function listener(e) {
+        console.dir(e);
+        switch (e.type) {
+            case "animationstart":
+                console.log('start');
+                p.attributes.src.nodeValue = "pizza-man-right.png";
+
+                break;
+
+            case "animationend":
+                console.log('end');
+                break;
+
+            case "animationiteration":
+                if (p.attributes.src.nodeValue.indexOf('right') > 0) {
+                    p.attributes.src.nodeValue = "pizza-man-left.png";
+                } else {
+                    p.attributes.src.nodeValue = "pizza-man-right.png";
+                }
+                break;
+        }
+    }
+    </script>
+</body>
+
+</html>

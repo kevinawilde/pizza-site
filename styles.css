@@ -1,0 +1,110 @@
+.pizzaShop {
+    width: 1200px;
+    height: 800px;
+    position: absolute;
+    background-image: url('background.jpg');
+    background-size: 1200px 800px;
+}
+
+#cashRegister {
+    position: relative;
+    height: 250px;
+    width: 225px;
+    left: 200px;
+    bottom: 50px;
+    margin-top: 600px;
+}
+
+#closedFridge {
+    position: relative;
+    height: 300px;
+    width: 175px;
+    bottom: 100px;
+    left: 800px;
+}
+
+#pickupCounter {
+    position: relative;
+    left: 0px;
+    bottom: 300px;
+    height: 150px;
+    width: 150px;
+}
+
+#chef {
+    position: relative;
+    left: -455px;
+    bottom: 105px;
+    height: 250px;
+    width: 250px;
+    animation-name: run;
+    animation-duration: 15s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-delay: 7s;
+}
+
+@keyframes run {
+    from {
+        bottom: 105px;
+        left: -440px;
+    }
+    to {
+        bottom: 105px;
+        left: -455px;
+    }
+    25% {
+        left: 100px;
+        bottom: 100px;
+    }
+    50% {
+        left: 50px;
+        bottom: 400px;
+    }
+    75% {
+        left: -400px;
+        bottom: 300px;
+    }
+}
+
+#oven {
+    position: relative;
+    left: 400px;
+    bottom: 400px;
+    height: 200px;
+    width: 200px;
+    transform: scaleX(-1);
+}
+
+#customer {
+    position: relative;
+    left: -975px;
+    bottom: 100px;
+    height: 200px;
+    width: 150px;
+    animation-name: customer;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes customer {
+    from {
+        bottom: 100px;
+        left: -1500px;
+    }
+    to {
+        left: -975px;
+        bottom: 100px;
+    }
+}
+
+
+.paused {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+}
