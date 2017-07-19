@@ -31,42 +31,67 @@
     width: 150px;
 }
 
+#pizzaBox {
+    position: relative;
+    left: 10px;
+    bottom: 615px;
+    height: 60px;
+    width: 150px;
+}
+
 #chef {
     position: relative;
     left: -455px;
     bottom: 105px;
     height: 250px;
     width: 250px;
+}
+
+#chef2 {
+    position: relative;
+    bottom: 600px;
+    left: 850px;
+}
+
+.freezerToOven {
     animation-name: run;
-    animation-duration: 15s;
-    animation-iteration-count: 1;
+    animation-duration: 3s;
+    animation-iteration-count: 2;
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
-    animation-delay: 7s;
 }
 
 @keyframes run {
     from {
-        bottom: 105px;
-        left: -440px;
+        bottom: 600px;
+        left: 850px;
     }
     to {
-        bottom: 105px;
-        left: -455px;
-    }
-    25% {
-        left: 100px;
-        bottom: 100px;
-    }
-    50% {
-        left: 50px;
-        bottom: 400px;
-    }
-    75% {
-        left: -400px;
         bottom: 300px;
+        left: 850px;
     }
 }
+
+.bakeToBox {
+    animation-name: run2;
+    animation-duration: 5s;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-delay: 1s;
+}
+
+@keyframes run2 {
+    from {
+        bottom: 600px;
+        left: 850px;
+    }
+    to {
+        bottom: 550px;
+        left: 500px;
+    }
+}
+
 
 #oven {
     position: relative;
@@ -78,11 +103,16 @@
 }
 
 #customer {
-    position: relative;
-    left: -975px;
-    bottom: 100px;
     height: 200px;
     width: 150px;
+}
+.firstSpot {
+    position: relative;
+    left: -200px;
+    bottom: 350px;
+}
+
+.customerOrder {
     animation-name: customer;
     animation-duration: 3s;
     animation-iteration-count: 1;
@@ -92,15 +122,62 @@
 
 @keyframes customer {
     from {
-        bottom: 100px;
-        left: -1500px;
+        bottom: 350px;
+        left: -600px;
     }
     to {
-        left: -975px;
-        bottom: 100px;
+        left: -200px;
+        bottom: 350px;
     }
 }
 
+.customerPickUp {
+    animation-name: customer2;
+    animation-duration: 6s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes customer2 {
+    from {
+        left: -200px;
+        bottom: 350px;
+    }
+    to {
+        bottom: 550px;
+        left: 0px;
+    }
+    50% {
+        left: -200px;
+        bottom: 550px;
+    }
+}
+
+.takeOut {
+    animation-name: customer3;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes customer3 {
+    from {
+        left: 0px;
+        bottom: 550px;
+    }
+    to {
+        bottom: 350px;
+        left: -800px;
+    }
+}
+
+.newSpot {
+    bottom: 350px;
+    left: -600px;
+    position: relative;
+}
 
 .paused {
     -webkit-animation-play-state: paused;
